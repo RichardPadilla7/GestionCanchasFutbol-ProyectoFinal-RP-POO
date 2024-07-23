@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,35 +15,23 @@ public class LoginFutbol {
     private JLabel usuario;
     private JLabel contraseña;
     private JLabel modosTitulo;
+    public JFrame LoginFrame;
 
-    public LoginFutbol() {
-        btnsesion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-
-
-
-            }
-        });
-
-
-
-
-
-
-
-
-
-
+    public LoginFutbol(JFrame frame) {
+        this.LoginFrame = frame;
 
         bntregistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-
+                
+                LoginFrame.dispose();
+                
+                JFrame frame = new JFrame("Registrarse");
+                frame.setContentPane(new Registrarse(frame).registro);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(9000, 9000);
+                frame.pack();
+                frame.setVisible(true);
 
 
             }
