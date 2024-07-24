@@ -48,6 +48,7 @@ public class LoginFutbol {
 
                 String email = usertext.getText();
                 String contrasenia = new String(contratext.getPassword());
+                String modoSeleccionado = (String) modosbtn.getSelectedItem();
 
                 // Conectar a la base de datos
                 String url = "jdbc:mysql://localhost:3306/reservasCanchas";
@@ -66,35 +67,35 @@ public class LoginFutbol {
                     if (resultSet.next()) {
                         String modo = resultSet.getString("modo");
 
-                        // Abrir la ventana dependiendo del modo de registro
-                        if (modo.equals("Administrador")) {
+                        if (modo.equals(modoSeleccionado)) {
+                            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso!. Bienvenido " + email);
+
+                            // Abrir la ventana dependiendo del modo de registro
+                            if (modo.equals("Administrador")) {
+                                JOptionPane.showMessageDialog(null,"Hola admin");
+
+
+                            } else if (modo.equals("Jugador")) {
+                                JOptionPane.showMessageDialog(null,"Hola jugador");
+
+
+                            } else if (modo.equals("Encargado")) {
+                                JOptionPane.showMessageDialog(null,"Hola encargado");
+
+
+                            }
+
                             LoginFrame.dispose();
-
-
-
-
-
-                        } else if (modo.equals("Jugador")) {
-                            LoginFrame.dispose();
-
-
-
-
-
-
-                        } else if (modo.equals("Encargado")) {
-                            LoginFrame.dispose();
-
-
-
 
                         } else {
-                            JOptionPane.showMessageDialog(null, "Usuario no encontrado o contraseña incorrecta");
+                            JOptionPane.showMessageDialog(null, "El modo seleccionado no coincide con el registrado.");
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario no encontrado o contraseña incorrecta");
                     }
-                    } catch (SQLException ex) {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error en la base de datos: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos: ");
                 }
             }
         });

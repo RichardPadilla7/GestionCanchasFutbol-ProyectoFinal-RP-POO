@@ -88,7 +88,7 @@ public class Registrarse {
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error en la base de datos: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos: ");
                 }
             }
         });
