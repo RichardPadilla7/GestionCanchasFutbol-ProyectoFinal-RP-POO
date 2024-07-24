@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class Registrarse {
     public JPanel registro;
@@ -26,6 +31,12 @@ public class Registrarse {
         this.registrosFrame = frame;
 
 
+        //Opciones del JComboBox pára el modo de registro
+        modotypes.addItem("Administrador");
+        modotypes.addItem("Jugador");
+        modotypes.addItem("Encargado");
+
+
         btnRegresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,5 +51,54 @@ public class Registrarse {
                 frame.setVisible(true);
             }
         });
+
+
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String nombre = textField1.getText();
+                String apellido = textField2.getText();
+                String cedula = textField3.getText();
+                String email = textField4.getText();
+                String contrasenia = textField5.getText();
+                String modo = (String) modotypes.getSelectedItem();
+
+                String url = "jdbc:mysql://localhost:3306/gestionCanchas";
+                String user = "root";
+                String password = "123456";
+
+                try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "INSERT INTO usuarios (nombre, apellido, email, contrasenia, cedula, modo) VALUES (?,?,?,?,?,?)";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, nombre);
+                    pstmt.setString(2, apellido);
+                    pstmt.setString(3, email);
+                    pstmt.setString(4, contrasenia);
+                    pstmt.setString(5, cedula);
+                    pstmt.setString(6, modo);
+
+                    int rowsAffected = pstmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Registro exitoso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al registrarse. Intente nuevamente.");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos: " + ex.getMessage());
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
     }
 }
