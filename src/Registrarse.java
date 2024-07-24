@@ -15,21 +15,21 @@ public class Registrarse {
     public JTextField textField2;
     public JTextField textField3;
     public JTextField textField4;
+    public JTextField textField5;
     public JButton btnRegresar;
     private JLabel imagenregist;
     private JLabel titulo2;
     private JLabel nombre;
+    private JLabel apellido;
     private JLabel email;
     private JLabel contrasenia;
     private JLabel cedula;
     private JLabel modo;
-    private JLabel apellido;
-    private JTextField textField5;
+
     public JFrame registrosFrame;
 
     public Registrarse(JFrame frame) {
         this.registrosFrame = frame;
-
 
         //Opciones del JComboBox pára el modo de registro
         modotypes.addItem("Administrador");
@@ -58,13 +58,13 @@ public class Registrarse {
             public void actionPerformed(ActionEvent e) {
 
                 String nombre = textField1.getText();
-                String apellido = textField2.getText();
-                String cedula = textField3.getText();
-                String email = textField4.getText();
-                String contrasenia = textField5.getText();
+                String apellido = textField5.getText();
+                String email = textField2.getText();
+                String contrasenia = textField3.getText();
+                String cedula = textField4.getText();
                 String modo = (String) modotypes.getSelectedItem();
 
-                String url = "jdbc:mysql://localhost:3306/gestionCanchas";
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
                 String user = "root";
                 String password = "123456";
 
@@ -80,6 +80,7 @@ public class Registrarse {
                     pstmt.setString(6, modo);
 
                     int rowsAffected = pstmt.executeUpdate();
+
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(null, "Registro exitoso!");
                     } else {

@@ -32,7 +32,15 @@ public class LoginFutbol {
                 frame.setSize(9000, 9000);
                 frame.pack();
                 frame.setVisible(true);
+            }
+        });
 
+
+
+
+        btnsesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });

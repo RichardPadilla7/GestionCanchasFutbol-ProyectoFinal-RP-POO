@@ -1,13 +1,15 @@
 public class usuarios {
     String nombre;
     String apellido;
+    String email;
     String contrasenia;
     String cedula;
     String modo;
 
-    public usuarios(String nombre, String apellido, String contrasenia, String cedula, String modo) {
+    public usuarios(String nombre, String apellido, String email, String contrasenia, String cedula, String modo) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.email = email;
         this.contrasenia = contrasenia;
         this.cedula = cedula;
         this.modo = modo;
@@ -27,6 +29,14 @@ public class usuarios {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContrasenia() {
