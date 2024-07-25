@@ -25,7 +25,6 @@ public class Registrarse {
     private JLabel contrasenia;
     private JLabel cedula;
     private JLabel modo;
-
     public JFrame registrosFrame;
 
     public Registrarse(JFrame frame) {

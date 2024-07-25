@@ -72,15 +72,35 @@ public class LoginFutbol {
 
                             // Abrir la ventana dependiendo del modo de registro
                             if (modo.equals("Administrador")) {
-                                JOptionPane.showMessageDialog(null,"Hola admin");
+
+                                LoginFrame.dispose();
+                                JFrame adminFrame = new JFrame("Administrador");
+                                adminFrame.setContentPane(new Administrador(adminFrame).admin);
+                                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                adminFrame.setSize(900, 600);
+                                adminFrame.pack();
+                                adminFrame.setVisible(true);
 
 
                             } else if (modo.equals("Jugador")) {
                                 JOptionPane.showMessageDialog(null,"Hola jugador");
 
 
+
+
+
+
+
+
                             } else if (modo.equals("Encargado")) {
                                 JOptionPane.showMessageDialog(null,"Hola encargado");
+
+
+
+
+
+
+
 
 
                             }

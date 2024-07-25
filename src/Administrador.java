@@ -1,7 +1,16 @@
 import javax.swing.*;
 
 public class Administrador {
-    private JButton agregarYGestionarJugadoresButton;
-    private JButton agregarCanchasButton;
-    private JButton agregarHorariosButton;
+    public JButton btnAgregar;
+    public JButton btnCanchas;
+    public JButton btnHorarios;
+    private JLabel TituloAdmin;
+    private JLabel imgAdmin;
+    public JPanel admin;
+    public JFrame AdminsFrame;
+
+    public Administrador(JFrame frameAdmin) {
+        this.AdminsFrame = frameAdmin;
+
+    }
 }
