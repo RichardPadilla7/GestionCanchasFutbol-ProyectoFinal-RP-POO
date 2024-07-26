@@ -1,11 +1,87 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class AgregarCancha {
-    private JButton agregarCanchaButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JButton regresarButton;
-    private JComboBox comboBox1;
+    public JButton btnagregarCancha;
+    public JTextField facultadtext;
+    public JTextField nombretext;
+    public JTextField ubitext;
+    public JTextField capacidadtext;
+    public JButton btnregresar;
+    public JComboBox tipo_cancha1;
+    public JPanel canchaPanel;
+    public JLabel img;
+    public JLabel titulo;
+    public JLabel facultad;
+    public JLabel nombre;
+    public JLabel cancha;
+    public JLabel ubicacion;
+    public JLabel capacidad;
+    public JFrame frameCancha;
+
+    public AgregarCancha(JFrame framecan) {
+        this.frameCancha = framecan;
+
+        //Opciones del JComboBox pára el modo de registro
+        tipo_cancha1.addItem("Cancha de cesped");
+        tipo_cancha1.addItem("Cancha de cemento");
+        tipo_cancha1.addItem("Cancha de tierra");
+        tipo_cancha1.addItem("Cancha sintetico");
+
+
+        btnregresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameCancha.dispose();
+                JFrame adminFrame = new JFrame("Administrador");
+                adminFrame.setContentPane(new Administrador(adminFrame).admin);
+                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                adminFrame.setSize(900, 600);
+                adminFrame.pack();
+                adminFrame.setVisible(true);
+            }
+        });
+
+
+        btnagregarCancha.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Validar datos
+                String facultad = facultadtext.getText();
+                String nombre = nombretext.getText();
+                String tipo_cancha = (String) tipo_cancha1.getSelectedItem();
+                String ubicacion = ubitext.getText();
+                String capacidad = capacidadtext.getText();
+
+                //Agregar cancha a la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                try(Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "INSERT INTO canchas (facultad, nombre, tipo_cancha, ubicacion, capacidad) VALUES (?,?,?,?,?)";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, facultad);
+                    pstmt.setString(2, nombre);
+                    pstmt.setString(3, tipo_cancha);
+                    pstmt.setString(4, ubicacion);
+                    pstmt.setInt(5, Integer.parseInt(capacidad));
+
+                    int rowsAffected = pstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Cancha agregada exitosamente!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al agregar cancha. Intente nuevamente.");
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos");
+                }
+            }
+        });
+    }
 }

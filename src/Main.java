@@ -7,7 +7,7 @@ public class Main {
         JFrame frame = new JFrame("Gestion de canchas de futbol");
         frame.setContentPane(new LoginFutbol(frame).login);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(19000, 19000);
+        frame.setSize(9000, 9000);
         frame.pack();
         frame.setVisible(true);
 
