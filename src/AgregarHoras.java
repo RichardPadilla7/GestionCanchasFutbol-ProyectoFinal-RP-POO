@@ -15,8 +15,9 @@ public class AgregarHoras {
     public JLabel fecha;
     public JLabel hora_inicio;
     public JLabel hora_fin;
-    public JLabel tipo_cancha;
+    public JLabel tipoCanchas;
     public JButton regresarButton;
+    public JButton btnborrarhorario;
     public JFrame frameHora;
 
     public AgregarHoras(JFrame framehora) {

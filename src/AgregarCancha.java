@@ -6,7 +6,7 @@ import java.sql.*;
 public class AgregarCancha {
     public JButton btnagregarCancha;
     public JTextField facultadtext;
-    public JTextField nombretext;
+    public JTextField cedulatext;
     public JTextField ubitext;
     public JTextField capacidadtext;
     public JButton btnregresar;
@@ -15,10 +15,11 @@ public class AgregarCancha {
     public JLabel img;
     public JLabel titulo;
     public JLabel facultad;
-    public JLabel nombre;
+    public JLabel cedula;
     public JLabel cancha;
     public JLabel ubicacion;
     public JLabel capacidad;
+    public JButton btnborrarcancha;
     public JFrame frameCancha;
 
     public AgregarCancha(JFrame framecan) {
@@ -50,7 +51,7 @@ public class AgregarCancha {
             public void actionPerformed(ActionEvent e) {
                 //Validar datos
                 String facultad = facultadtext.getText();
-                String nombre = nombretext.getText();
+                String cedula = cedulatext.getText();
                 String tipo_cancha = (String) tipo_cancha1.getSelectedItem();
                 String ubicacion = ubitext.getText();
                 String capacidad = capacidadtext.getText();
@@ -61,11 +62,11 @@ public class AgregarCancha {
                 String password = "123456";
 
                 try(Connection conn = DriverManager.getConnection(url, user, password)) {
-                    String sql = "INSERT INTO canchas (facultad, nombre, tipo_cancha, ubicacion, capacidad) VALUES (?,?,?,?,?)";
+                    String sql = "INSERT INTO canchas (facultad, cedula, tipo_cancha, ubicacion, capacidad) VALUES (?,?,?,?,?)";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
 
                     pstmt.setString(1, facultad);
-                    pstmt.setString(2, nombre);
+                    pstmt.setString(2, cedula);
                     pstmt.setString(3, tipo_cancha);
                     pstmt.setString(4, ubicacion);
                     pstmt.setInt(5, Integer.parseInt(capacidad));

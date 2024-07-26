@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.sql.*;
 
 public class AgregarJugador {
@@ -29,6 +30,7 @@ public class AgregarJugador {
     public JLabel titulo2;
     public JLabel buscarCedula;
     public JButton regresarButton;
+    public JTextArea MostrarDatos;
     public JFrame frameAgre;
 
     public AgregarJugador(JFrame frameAg) {
@@ -77,7 +79,6 @@ public class AgregarJugador {
                     pstmt.setString(7, telefono);
 
                     int rowsAffected = pstmt.executeUpdate();
-
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(frameAgre, "Jugador agregado exitosamente!");
                     } else {
@@ -87,17 +88,60 @@ public class AgregarJugador {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(frameAgre, "Error en la base de datos");
                 }
-
-
             }
         });
-
 
         btnbuscarJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Conectar a la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
 
+                try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "SELECT * FROM agregar_jugadores WHERE cedula = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, cedulabuscartext.getText());
 
+                    ResultSet resultSet = pstmt.executeQuery();
+
+                    if (resultSet.next()) {
+                        String nombre = resultSet.getString("nombre");
+                        String apellido = resultSet.getString("apellido");
+                        int edad = resultSet.getInt("edad");
+                        String cedula = resultSet.getString("cedula");
+                        String email = resultSet.getString("email");
+                        String contrasenia = resultSet.getString("contrasenia");
+                        String telefono = resultSet.getString("telefono");
+
+                        //Mostrar datos
+                        String datosJugador = "Nombre: " + nombre + "\n" +
+                                "Apellido: " + apellido + "\n" +
+                                "Edad: " + edad + "\n" +
+                                "Cédula: " + cedula + "\n" +
+                                "Email: " + email + "\n" +
+                                "Contraseña: " + contrasenia + "\n" +
+                                "Teléfono: " + telefono;
+                        MostrarDatos.setText(datosJugador);
+
+                        // Limpiar los campos de texto
+                        nombretext.setText("");
+                        apellidotext.setText("");
+                        edadtext.setText("");
+                        cedulatext.setText("");
+                        emailtext.setText("");
+                        contratext.setText("");
+                        telefonotext.setText("");
+
+                    } else {
+                        JOptionPane.showMessageDialog(frameAgre, "Jugador no encontrado.");
+                        MostrarDatos.setText("");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameAgre, "Error en la base de datos");
+                }
             }
         });
 
@@ -106,6 +150,34 @@ public class AgregarJugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                // Conectar a la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                String cedulaEliminar = cedulabuscartext.getText();
+
+                if (cedulaEliminar.isEmpty()) {
+                    JOptionPane.showMessageDialog(frameAgre, "Ingrese una cédula para eliminar.");
+                    return;
+                }
+                try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "DELETE FROM agregar_jugadores WHERE cedula = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, cedulaEliminar);
+
+                    int rowsAffected = pstmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(frameAgre, "Jugador eliminado exitosamente!");
+                        MostrarDatos.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(frameAgre, "Jugador no encontrado.");
+                        MostrarDatos.setText("");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameAgre, "Error en la base de datos");
+                }
             }
         });
     }
