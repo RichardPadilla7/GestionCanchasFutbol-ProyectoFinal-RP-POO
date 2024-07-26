@@ -109,5 +109,110 @@ public class AgregarHoras {
                 }
             }
         });
+
+
+        buscaHorarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String fecha = ingresefechaText.getText();
+                String tipo_cancha = (String) ingreseTipoCanchaText.getSelectedItem();
+
+                // Convertir la fecha al formato yyyy-MM-dd
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = null;
+                try {
+                    fechaFormateada = outputFormat.format(inputFormat.parse(fecha));
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error en el formato de la fecha. Use dd/MM/yyyy.");
+                    return;
+                }
+
+                //Buscar cancha en la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                try(Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "SELECT * FROM horarios WHERE fecha =? AND tipo_cancha =?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, fechaFormateada);
+                    pstmt.setString(2, tipo_cancha);
+
+                    ResultSet resultSet = pstmt.executeQuery();
+
+                    if (resultSet.next()) {
+                        MostrarDatosHorario.setText(
+                                "Fecha: " + resultSet.getString("fecha") +
+                                        "\nHora inicio: " + resultSet.getString("hora_inicio") +
+                                        "\nHora fin: " + resultSet.getString("hora_fin") +
+                                        "\nTipo de cancha: " + resultSet.getString("tipo_cancha"));
+
+                        // Limpiar los campos de texto
+                        fechatext.setText("");
+                        hiniciotext.setText("");
+                        hfintext.setText("");
+                        ingresefechaText.setText("");
+
+                    } else {
+                        JOptionPane.showMessageDialog(frameHora, "Horario no encontrada");
+                        MostrarDatosHorario.setText("");
+                        }
+                    }catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameHora, "Error en la base de datos");
+                }
+            }
+        });
+
+
+        btnborrarhorario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String fecha = ingresefechaText.getText();
+                String tipo_cancha = (String) ingreseTipoCanchaText.getSelectedItem();
+
+                // Convertir la fecha al formato yyyy-MM-dd
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = null;
+                try {
+                    fechaFormateada = outputFormat.format(inputFormat.parse(fecha));
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameHora, "Error en el formato de la fecha. Use dd/MM/yyyy.");
+                    return;
+                }
+
+                //Borrar cancha de la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                try(Connection conn = DriverManager.getConnection(url, user, password)) {
+                    String sql = "DELETE FROM horarios WHERE fecha =? AND tipo_cancha =?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, fechaFormateada);
+                    pstmt.setString(2, tipo_cancha);
+
+                    int rowsAffected = pstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(frameHora, "Hora eliminada exitosamente!");
+                        MostrarDatosHorario.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(frameHora, "No se encontró la hora para el tipo de cancha seleccionado.");
+                        MostrarDatosHorario.setText("");
+                    }
+                }catch (Exception ex){
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(frameHora, "Error en la base de datos");
+                    }
+                }
+        });
     }
 }

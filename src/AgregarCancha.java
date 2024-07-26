@@ -120,8 +120,16 @@ public class AgregarCancha {
                                 "\nTipo de cancha: " + resultSet.getString("tipo_cancha") +
                                 "\nUbicacion: " + resultSet.getString("ubicacion") +
                                 "\nCapacidad: " + resultSet.getInt("capacidad"));
+
+                        // Limpiar los campos de texto
+                        facultadtext.setText("");
+                        cedulatext.setText("");
+                        ubitext.setText("");
+                        capacidadtext.setText("");
+
                     } else {
                         JOptionPane.showMessageDialog(frameCancha, "Cancha no encontrada");
+                        MostrarDatosCancha.setText("");
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
