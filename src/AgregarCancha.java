@@ -20,6 +20,14 @@ public class AgregarCancha {
     public JLabel ubicacion;
     public JLabel capacidad;
     public JButton btnborrarcancha;
+    public JTextField ingresaFacutext;
+    public JTextField ingresaCeduText;
+    public JButton btnBuscarCancha;
+    public JTextArea MostrarDatosCancha;
+    private JLabel img2;
+    private JLabel titulo2;
+    private JLabel ingresefacultad;
+    private JLabel ingresecedula;
     public JFrame frameCancha;
 
     public AgregarCancha(JFrame framecan) {
@@ -74,14 +82,88 @@ public class AgregarCancha {
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Cancha agregada exitosamente!");
+                        JOptionPane.showMessageDialog(frameCancha, "Cancha agregada exitosamente!");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al agregar cancha. Intente nuevamente.");
+                        JOptionPane.showMessageDialog(frameCancha, "Error al agregar cancha. Intente nuevamente.");
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error en la base de datos");
+                    JOptionPane.showMessageDialog(frameCancha, "Error en la base de datos");
                 }
+            }
+        });
+
+
+        btnBuscarCancha.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Conectar a la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                String cedulaBuscar = ingresaCeduText.getText();
+                String facultadBuscar = ingresaFacutext.getText();
+
+                try(Connection conn = DriverManager.getConnection(url, user, password)){
+                    String sql = "SELECT * FROM canchas WHERE cedula =? AND facultad =?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, cedulaBuscar);
+                    pstmt.setString(2, facultadBuscar);
+
+                    ResultSet resultSet = pstmt.executeQuery();
+
+                    if (resultSet.next()) {
+                        MostrarDatosCancha.setText("Facultad: " + resultSet.getString("facultad") +
+                                "\nCedula: " + resultSet.getString("cedula") +
+                                "\nTipo de cancha: " + resultSet.getString("tipo_cancha") +
+                                "\nUbicacion: " + resultSet.getString("ubicacion") +
+                                "\nCapacidad: " + resultSet.getInt("capacidad"));
+                    } else {
+                        JOptionPane.showMessageDialog(frameCancha, "Cancha no encontrada");
+                    }
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameCancha, "Error en la base de datos");
+                }
+            }
+        });
+
+
+        btnborrarcancha.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Conectar a la base de datos
+                String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+                String user = "root";
+                String password = "123456";
+
+                String cedulaBorrar = ingresaCeduText.getText();
+                String facultadBorrar = ingresaFacutext.getText();
+
+                try(Connection conn = DriverManager.getConnection(url, user, password)){
+                    String sql = "DELETE FROM canchas WHERE cedula =? AND facultad =?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+
+                    pstmt.setString(1, cedulaBorrar);
+                    pstmt.setString(2, facultadBorrar);
+
+                    int rowsAffected = pstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(frameCancha, "Cancha eliminada exitosamente!");
+                        MostrarDatosCancha.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(frameCancha, "Cancha no encontrado.");
+                        MostrarDatosCancha.setText("");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frameCancha, "Error en la base de datos");
+                }
+
+
             }
         });
     }

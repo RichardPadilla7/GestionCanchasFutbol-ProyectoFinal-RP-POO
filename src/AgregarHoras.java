@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class AgregarHoras {
     public JTextField fechatext;
@@ -18,6 +21,14 @@ public class AgregarHoras {
     public JLabel tipoCanchas;
     public JButton regresarButton;
     public JButton btnborrarhorario;
+    public JButton buscaHorarioButton;
+    public JTextArea MostrarDatosHorario;
+    public JLabel img2;
+    public JLabel titulo2;
+    public JTextField ingresefechaText;
+    public JComboBox ingreseTipoCanchaText;
+    public JLabel ingreseFecha;
+    public JLabel ingreseTipoCancha;
     public JFrame frameHora;
 
     public AgregarHoras(JFrame framehora) {
@@ -28,6 +39,14 @@ public class AgregarHoras {
         tipo_cancha2.addItem("Cancha de cemento");
         tipo_cancha2.addItem("Cancha de tierra");
         tipo_cancha2.addItem("Cancha sintetico");
+
+        //Opciones para buscar o borrar en JcomboBox
+        ingreseTipoCanchaText.addItem("Cancha de cesped");
+        ingreseTipoCanchaText.addItem("Cancha de cemento");
+        ingreseTipoCanchaText.addItem("Cancha de tierra");
+        ingreseTipoCanchaText.addItem("Cancha sintetico");
+
+
 
         regresarButton.addActionListener(new ActionListener() {
             @Override
@@ -51,6 +70,18 @@ public class AgregarHoras {
                 String hora_fin = hfintext.getText();
                 String tipo_cancha = (String) tipo_cancha2.getSelectedItem();
 
+                // Convertir la fecha al formato yyyy-MM-dd
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaFormateada = null;
+                try {
+                    fechaFormateada = outputFormat.format(inputFormat.parse(fecha));
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error en el formato de la fecha. Use dd/MM/yyyy.");
+                    return;
+                }
+
                 //Agregar cancha a la base de datos
                 String url = "jdbc:mysql://localhost:3306/reservasCanchas";
                 String user = "root";
@@ -60,7 +91,7 @@ public class AgregarHoras {
                     String sql = "INSERT INTO horarios (fecha, hora_inicio, hora_fin, tipo_cancha) VALUES (?,?,?,?)";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
 
-                    pstmt.setString(1, fecha);
+                    pstmt.setString(1, fechaFormateada);
                     pstmt.setString(2, hora_inicio);
                     pstmt.setString(3, hora_fin);
                     pstmt.setString(4, tipo_cancha);
