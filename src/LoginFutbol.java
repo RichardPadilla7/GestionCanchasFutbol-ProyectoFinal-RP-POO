@@ -77,20 +77,19 @@ public class LoginFutbol {
                                 JFrame adminFrame = new JFrame("Administrador");
                                 adminFrame.setContentPane(new Administrador(adminFrame).admin);
                                 adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                adminFrame.setSize(900, 600);
+                                adminFrame.setSize(1900, 1600);
                                 adminFrame.pack();
                                 adminFrame.setVisible(true);
 
-
                             } else if (modo.equals("Jugador")) {
-                                JOptionPane.showMessageDialog(null,"Hola jugador");
 
-
-
-
-
-
-
+                                LoginFrame.dispose();
+                                JFrame JugadorFrame = new JFrame("Jugador");
+                                JugadorFrame.setContentPane(new Jugador(JugadorFrame).jugador);
+                                JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                JugadorFrame.setSize(1900, 1600);
+                                JugadorFrame.pack();
+                                JugadorFrame.setVisible(true);
 
                             } else if (modo.equals("Encargado")) {
                                 JOptionPane.showMessageDialog(null,"Hola encargado");
