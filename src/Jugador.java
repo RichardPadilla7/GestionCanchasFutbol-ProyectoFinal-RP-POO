@@ -36,10 +36,12 @@ public class Jugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-
-
-
+                JFrame frame = new JFrame("Detalles de otras Canchas");
+                frame.setContentPane(new DetallesCanchas(frame).deatallesCanchas);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(25000, 25000);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
 
@@ -48,7 +50,12 @@ public class Jugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
+                JFrame frame = new JFrame("Cancelar Reserva");
+                frame.setContentPane(new DetallesCanchas(frame).deatallesCanchas);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(25000, 25000);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
     }

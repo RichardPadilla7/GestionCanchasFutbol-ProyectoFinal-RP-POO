@@ -23,7 +23,6 @@ public class ReservarCanchas {
     public JLabel tipoCanchaReservas;
     public JTextField horafinReservText;
     public JLabel horafinReserva;
-
     public JFrame ReservaFrame;
 
     public ReservarCanchas(JFrame Reservaframe) {
