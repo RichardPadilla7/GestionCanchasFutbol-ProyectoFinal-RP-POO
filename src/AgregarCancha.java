@@ -79,6 +79,12 @@ public class AgregarCancha {
                     pstmt.setString(4, ubicacion);
                     pstmt.setInt(5, Integer.parseInt(capacidad));
 
+                    //Limpiar las casilla
+                    facultadtext.setText("");
+                    cedulatext.setText("");
+                    ubitext.setText("");
+                    capacidadtext.setText("");
+
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0) {
