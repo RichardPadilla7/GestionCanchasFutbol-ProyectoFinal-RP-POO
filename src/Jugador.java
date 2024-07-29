@@ -51,7 +51,7 @@ public class Jugador {
             public void actionPerformed(ActionEvent e) {
 
                 JFrame frame = new JFrame("Cancelar Reserva");
-                frame.setContentPane(new DetallesCanchas(frame).deatallesCanchas);
+                frame.setContentPane(new CancelarReserva(frame).cancelar);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(25000, 25000);
                 frame.pack();
