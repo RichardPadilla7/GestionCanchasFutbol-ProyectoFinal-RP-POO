@@ -92,8 +92,14 @@ public class LoginFutbol {
                                 JugadorFrame.setVisible(true);
 
                             } else if (modo.equals("Encargado")) {
-                                JOptionPane.showMessageDialog(null,"Hola encargado");
 
+                                LoginFrame.dispose();
+                                JFrame JugadorFrame = new JFrame("Encargado");
+                                JugadorFrame.setContentPane(new Encargado(JugadorFrame).encargado);
+                                JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                JugadorFrame.setSize(1900, 1600);
+                                JugadorFrame.pack();
+                                JugadorFrame.setVisible(true);
 
 
 

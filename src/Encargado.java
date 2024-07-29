@@ -23,7 +23,7 @@ public class Encargado {
             public void actionPerformed(ActionEvent e) {
 
                 JFrame frame = new JFrame("Visualizar Reservas Actuales");
-                frame.setContentPane(new ReservarCanchas(frame).reservasCanchas);
+                frame.setContentPane(new VerRegistro(frame).visualizar);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(9000, 9000);
                 frame.pack();

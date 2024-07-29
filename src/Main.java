@@ -1,5 +1,4 @@
 //Richard Padilla
-//Proyecto final
 import javax.swing.*;
 
 public class Main {
