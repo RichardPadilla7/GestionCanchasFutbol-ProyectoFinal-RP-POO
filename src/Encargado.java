@@ -52,6 +52,8 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                //Richard Padilla
+
 
 
 
