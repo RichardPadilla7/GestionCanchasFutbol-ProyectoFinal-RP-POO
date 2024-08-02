@@ -37,6 +37,13 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JFrame frame = new JFrame("Actualizar Estado de la Cancha");
+                frame.setContentPane(new ActualizarCanchas(frame).mantenimiento);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(9000, 9000);
+                frame.pack();
+                frame.setVisible(true);
+
             }
         });
 
@@ -44,6 +51,9 @@ public class Encargado {
         btnControlAcceso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
+
 
             }
         });
