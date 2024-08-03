@@ -32,25 +32,11 @@ public class AgregarJugador {
     public JButton regresarButton;
     public JTextArea MostrarDatos;
     public JFrame frameAgre;
+    public JFrame frameAdmin;
 
-    public AgregarJugador(JFrame frameAg) {
+    public AgregarJugador(JFrame frameAg, JFrame frameAdmin){
         this.frameAgre = frameAg;
-
-        regresarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                frameAgre.dispose();
-
-                JFrame frameAgre = new JFrame("Administrador");
-                frameAgre.setContentPane(new Administrador(frameAgre).admin);
-                frameAgre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frameAgre.setSize(900, 600);
-                frameAgre.pack();
-                frameAgre.setVisible(true);
-            }
-        });
-
+        this.frameAdmin = frameAdmin;
 
         btnagregarJugador.addActionListener(new ActionListener() {
             @Override
@@ -180,6 +166,17 @@ public class AgregarJugador {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(frameAgre, "Error en la base de datos");
+                }
+            }
+        });
+
+
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frameAgre.dispose();
+                if (frameAdmin != null && !frameAdmin.isVisible()) {
+                    frameAdmin.setVisible(true);
                 }
             }
         });

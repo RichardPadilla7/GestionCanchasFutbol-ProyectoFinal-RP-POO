@@ -29,9 +29,11 @@ public class AgregarCancha {
     private JLabel ingresefacultad;
     private JLabel ingresecedula;
     public JFrame frameCancha;
+    public JFrame frameAdmin;
 
-    public AgregarCancha(JFrame framecan) {
+    public AgregarCancha(JFrame framecan, JFrame frameAdmin) {
         this.frameCancha = framecan;
+        this.frameAdmin = frameAdmin;
 
         //Opciones del JComboBox pára el modo de registro
         tipo_cancha1.addItem("Cancha de cesped");
@@ -41,15 +43,11 @@ public class AgregarCancha {
 
 
         btnregresar.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 frameCancha.dispose();
-                JFrame adminFrame = new JFrame("Administrador");
-                adminFrame.setContentPane(new Administrador(adminFrame).admin);
-                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                adminFrame.setSize(900, 600);
-                adminFrame.pack();
-                adminFrame.setVisible(true);
+                if (frameAdmin != null && !frameAdmin.isVisible()) {
+                    frameAdmin.setVisible(true);
+                }
             }
         });
 

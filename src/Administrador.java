@@ -6,8 +6,8 @@ public class Administrador {
     public JButton btnAgregar;
     public JButton btnCanchas;
     public JButton btnHorarios;
-    private JLabel TituloAdmin;
-    private JLabel imgAdmin;
+    public JLabel TituloAdmin;
+    public JLabel imgAdmin;
     public JPanel admin;
     public JFrame AdminsFrame;
 
@@ -17,47 +17,42 @@ public class Administrador {
         btnAgregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 AdminsFrame.dispose();
 
-                JFrame adminFrame = new JFrame("Agregar Jugador");
-                adminFrame.setContentPane(new AgregarJugador(AdminsFrame).masjugador);
-                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                adminFrame.setSize(900, 600);
-                adminFrame.pack();
-                adminFrame.setVisible(true);
-
+                JFrame agregarJugadorFrame = new JFrame("Agregar Jugador");
+                agregarJugadorFrame.setContentPane(new AgregarJugador(agregarJugadorFrame, AdminsFrame).masjugador);
+                agregarJugadorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                agregarJugadorFrame.setSize(900, 600);
+                agregarJugadorFrame.pack();
+                agregarJugadorFrame.setVisible(true);
             }
         });
 
         btnCanchas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 AdminsFrame.dispose();
 
-                JFrame adminFrame = new JFrame("Agregar Cancha");
-                adminFrame.setContentPane(new AgregarCancha(AdminsFrame).canchaPanel);
-                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                adminFrame.setSize(900, 600);
-                adminFrame.pack();
-                adminFrame.setVisible(true);
-
+                JFrame agregarCanchaFrame = new JFrame("Agregar Cancha");
+                agregarCanchaFrame.setContentPane(new AgregarCancha(agregarCanchaFrame, AdminsFrame).canchaPanel);
+                agregarCanchaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                agregarCanchaFrame.setSize(900, 600);
+                agregarCanchaFrame.pack();
+                agregarCanchaFrame.setVisible(true);
             }
         });
 
         btnHorarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 AdminsFrame.dispose();
 
-                JFrame adminFrame = new JFrame("Agregar Horarios");
-                adminFrame.setContentPane(new AgregarHoras(AdminsFrame).horasPanel);
-                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                adminFrame.setSize(900, 600);
-                adminFrame.pack();
-                adminFrame.setVisible(true);
+                JFrame agregarHorasFrame = new JFrame("Agregar Horarios");
+                agregarHorasFrame.setContentPane(new AgregarHoras(agregarHorasFrame, AdminsFrame).horasPanel);
+                agregarHorasFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                agregarHorasFrame.setSize(900, 600);
+                agregarHorasFrame.pack();
+                agregarHorasFrame.setVisible(true);
             }
         });
     }
