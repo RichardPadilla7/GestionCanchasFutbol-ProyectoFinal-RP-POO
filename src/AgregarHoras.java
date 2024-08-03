@@ -95,6 +95,11 @@ public class AgregarHoras {
                     pstmt.setString(3, hora_fin);
                     pstmt.setString(4, tipo_cancha);
 
+                    //limpiar cuadros de registros
+                    fechatext.setText("");
+                    hiniciotext.setText("");
+                    hfintext.setText("");
+
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0) {

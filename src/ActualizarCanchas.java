@@ -19,9 +19,11 @@ public class ActualizarCanchas {
     public JPanel mantenimiento;
     public JButton regresarButton;
     public JFrame estadoFrame;
+    public JFrame encargadoFrame;
 
-    public ActualizarCanchas(JFrame estadoframe) {
+    public ActualizarCanchas(JFrame estadoframe, JFrame encargadoframe) {
         this.estadoFrame = estadoframe;
+        this.encargadoFrame = encargadoframe;
 
         // JComboBox de tipos de canchas
         tipoCanchaBox.addItem("Cancha de cesped");
@@ -45,15 +47,14 @@ public class ActualizarCanchas {
             }
         });
 
+
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Encargado");
-                frame.setContentPane(new Encargado(frame).encargado);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                estadoFrame.dispose();
+                if (encargadoframe != null && !encargadoframe.isVisible()) {
+                    encargadoframe.setVisible(true);
+                }
             }
         });
     }

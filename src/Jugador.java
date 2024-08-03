@@ -22,12 +22,14 @@ public class Jugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Reservar Canchas");
-                frame.setContentPane(new ReservarCanchas(frame).reservasCanchas);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                JugadorFrame.dispose();
+
+                JFrame reservarCanchasFrame = new JFrame("Reservar Canchas");
+                reservarCanchasFrame.setContentPane(new ReservarCanchas(reservarCanchasFrame,JugadorFrame).reservasCanchas);
+                reservarCanchasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                reservarCanchasFrame.setSize(9000, 9000);
+                reservarCanchasFrame.pack();
+                reservarCanchasFrame.setVisible(true);
             }
         });
 
@@ -36,12 +38,14 @@ public class Jugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Detalles de otras Canchas");
-                frame.setContentPane(new DetallesCanchas(frame).deatallesCanchas);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(25000, 25000);
-                frame.pack();
-                frame.setVisible(true);
+                JugadorFrame.dispose();
+
+                JFrame cancelarFrame = new JFrame("Detalles de otras Canchas");
+                cancelarFrame.setContentPane(new DetallesCanchas(cancelarFrame,JugadorFrame).deatallesCanchas);
+                cancelarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                cancelarFrame.setSize(25000, 25000);
+                cancelarFrame.pack();
+                cancelarFrame.setVisible(true);
             }
         });
 
@@ -50,12 +54,14 @@ public class Jugador {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Cancelar Reserva");
-                frame.setContentPane(new CancelarReserva(frame).cancelar);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(25000, 25000);
-                frame.pack();
-                frame.setVisible(true);
+                JugadorFrame.dispose();
+
+                JFrame cancelarFrame = new JFrame("Cancelar Reserva");
+                cancelarFrame.setContentPane(new CancelarReserva(cancelarFrame,JugadorFrame).cancelar);
+                cancelarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                cancelarFrame.setSize(25000, 25000);
+                cancelarFrame.pack();
+                cancelarFrame.setVisible(true);
             }
         });
     }

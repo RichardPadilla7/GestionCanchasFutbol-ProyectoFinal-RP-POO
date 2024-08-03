@@ -11,11 +11,13 @@ public class VerRegistro {
     public JLabel VerTipo;
     public JButton regresarButton;
     public JLabel titulo;
-    public JFrame verFrame;
     public JComboBox<String> verCanchaText;
+    public JFrame verFrame;
+    public JFrame encargadoFrame;
 
-    public VerRegistro(JFrame verframe) {
+    public VerRegistro(JFrame verframe,JFrame encargadoframe) {
         this.verFrame = verframe;
+        this.encargadoFrame = encargadoframe;
 
         // Opciones del JComboBox
         verCanchaText.addItem("Cancha de cesped");
@@ -102,12 +104,9 @@ public class VerRegistro {
             @Override
             public void actionPerformed(ActionEvent e) {
                 verFrame.dispose();
-                JFrame frame = new JFrame("Encargado");
-                frame.setContentPane(new Encargado(frame).encargado);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(900, 600);
-                frame.pack();
-                frame.setVisible(true);
+                if (encargadoframe != null && !encargadoframe.isVisible()) {
+                    encargadoframe.setVisible(true);
+                }
             }
         });
     }

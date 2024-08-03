@@ -16,9 +16,11 @@ public class CancelarReserva {
     public JLabel ingreseCedula;
     public JLabel cancelarTipo;
     public JFrame cancelarFrame;
+    public JFrame JugaFrame;
 
-    public CancelarReserva(JFrame canceframe) {
+    public CancelarReserva(JFrame canceframe, JFrame JugaFrame) {
         this.cancelarFrame = canceframe;
+        this.JugaFrame = JugaFrame;
 
         // Opciones del JComboBox para el modo de registro
         canTipoText.addItem("Cancha de cesped");
@@ -72,14 +74,10 @@ public class CancelarReserva {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 cancelarFrame.dispose();
-                JFrame jugadorFrame = new JFrame("Jugador");
-                jugadorFrame.setContentPane(new Jugador(jugadorFrame).jugador);
-                jugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jugadorFrame.setSize(900, 600);
-                jugadorFrame.pack();
-                jugadorFrame.setVisible(true);
+                if (JugaFrame != null && !JugaFrame.isVisible()) {
+                    JugaFrame.setVisible(true);
+                }
             }
         });
 

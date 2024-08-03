@@ -21,9 +21,12 @@ public class DetallesCanchas {
     public JLabel tipoCanchasVer;
     public JLabel mostrarURL;
     public JFrame DetallesFrame;
+    public JFrame JugaFrame;
 
-    public DetallesCanchas(JFrame detallesframe) {
+
+    public DetallesCanchas(JFrame detallesframe, JFrame JugaFrame) {
         this.DetallesFrame = detallesframe;
+        this.JugaFrame = JugaFrame;
 
         // Opciones del JComboBox para los tipos de cancha
         tipoCanchasDetallesText.addItem("Cancha de cesped");
@@ -144,12 +147,9 @@ public class DetallesCanchas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DetallesFrame.dispose();
-                JFrame jugadorFrame = new JFrame("Jugador");
-                jugadorFrame.setContentPane(new Jugador(jugadorFrame).jugador);
-                jugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jugadorFrame.setSize(900, 600);
-                jugadorFrame.pack();
-                jugadorFrame.setVisible(true);
+                if (JugaFrame != null && !JugaFrame.isVisible()) {
+                    JugaFrame.setVisible(true);
+                }
             }
         });
     }

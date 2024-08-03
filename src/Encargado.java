@@ -22,13 +22,14 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Visualizar Reservas Actuales");
-                frame.setContentPane(new VerRegistro(frame).visualizar);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                encargadoFrame.dispose();
 
+                JFrame visualizarReservasFrame = new JFrame("Visualizar Reservas Actuales");
+                visualizarReservasFrame.setContentPane(new VerRegistro(visualizarReservasFrame,encargadoFrame).visualizar);
+                visualizarReservasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                visualizarReservasFrame.setSize(9000, 9000);
+                visualizarReservasFrame.pack();
+                visualizarReservasFrame.setVisible(true);
             }
         });
 
@@ -37,13 +38,14 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Actualizar Estado de la Cancha");
-                frame.setContentPane(new ActualizarCanchas(frame).mantenimiento);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                encargadoFrame.dispose();
 
+                JFrame mantenimientoFrame = new JFrame("Actualizar Estado de la Cancha");
+                mantenimientoFrame.setContentPane(new ActualizarCanchas(mantenimientoFrame, encargadoFrame).mantenimiento);
+                mantenimientoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mantenimientoFrame.setSize(9000, 9000);
+                mantenimientoFrame.pack();
+                mantenimientoFrame.setVisible(true);
             }
         });
 
@@ -52,12 +54,14 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JFrame frame = new JFrame("Control de Acceso a la Cancha");
-                frame.setContentPane(new ControlAcceso(frame).controlar);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                encargadoFrame.dispose();
+
+                JFrame controlarFrame = new JFrame("Control de Acceso a la Cancha");
+                controlarFrame.setContentPane(new ControlAcceso(controlarFrame,encargadoFrame).controlar);
+                controlarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                controlarFrame.setSize(9000, 9000);
+                controlarFrame.pack();
+                controlarFrame.setVisible(true);
             }
         });
 

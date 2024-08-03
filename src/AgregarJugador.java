@@ -66,6 +66,15 @@ public class AgregarJugador {
                     pstmt.setString(6, contrasenia);
                     pstmt.setString(7, telefono);
 
+                    //Limpiar cuadrso de registros
+                    nombretext.setText("");
+                    apellidotext.setText("");
+                    edadtext.setText("");
+                    cedulatext.setText("");
+                    emailtext.setText("");
+                    contratext.setText("");
+                    telefonotext.setText("");
+
                     int rowsAffected = pstmt.executeUpdate();
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(frameAgre, "Jugador agregado exitosamente!");

@@ -24,9 +24,11 @@ public class ReservarCanchas {
     public JTextField horafinReservText;
     public JLabel horafinReserva;
     public JFrame ReservaFrame;
+    public JFrame JugaFrame;
 
-    public ReservarCanchas(JFrame Reservaframe) {
+    public ReservarCanchas(JFrame Reservaframe, JFrame JugaFrame) {
         this.ReservaFrame = Reservaframe;
+        this.JugaFrame = JugaFrame;
 
         // Opciones del JComboBox para el modo de registro
         TipoReservaCanchasBox.addItem("Cancha de cesped");
@@ -146,12 +148,9 @@ public class ReservarCanchas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ReservaFrame.dispose();
-                JFrame jugadorFrame = new JFrame("Jugador");
-                jugadorFrame.setContentPane(new Jugador(jugadorFrame).jugador);
-                jugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                jugadorFrame.setSize(900, 600);
-                jugadorFrame.pack();
-                jugadorFrame.setVisible(true);
+                if (JugaFrame != null && !JugaFrame.isVisible()) {
+                    JugaFrame.setVisible(true);
+                }
             }
         });
     }

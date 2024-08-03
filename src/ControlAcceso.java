@@ -15,9 +15,11 @@ public class ControlAcceso {
     public JLabel correoRegistrado;
     public JPanel controlar;
     public JFrame controlFrame;
+    public JFrame encargadoFrame;
 
-    public ControlAcceso(JFrame controlframe) {
+    public ControlAcceso(JFrame controlframe, JFrame encargadoframe) {
         this.controlFrame = controlframe;
+        this.encargadoFrame = encargadoframe;
 
 
         autorizarButton.addActionListener(new ActionListener() {
@@ -86,12 +88,10 @@ public class ControlAcceso {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Encargado");
-                frame.setContentPane(new Encargado(frame).encargado);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
-                frame.pack();
-                frame.setVisible(true);
+                controlFrame.dispose();
+                if (encargadoframe != null && !encargadoframe.isVisible()) {
+                    encargadoframe.setVisible(true);
+                }
             }
         });
     }
