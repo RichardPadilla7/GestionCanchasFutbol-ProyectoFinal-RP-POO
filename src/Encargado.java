@@ -52,11 +52,12 @@ public class Encargado {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //Richard Padilla
-
-
-
-
+                JFrame frame = new JFrame("Control de Acceso a la Cancha");
+                frame.setContentPane(new ControlAcceso(frame).controlar);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(9000, 9000);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
 

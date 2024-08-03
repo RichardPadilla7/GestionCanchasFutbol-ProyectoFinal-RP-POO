@@ -68,6 +68,20 @@ public class ReservarCanchas {
                 String password = "123456";
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
+                    // Verificar el estado de la cancha
+                    String sqlCheckEstado = "SELECT estado FROM estado WHERE tipo_cancha = ?";
+                    PreparedStatement pstmtCheckEstado = conn.prepareStatement(sqlCheckEstado);
+                    pstmtCheckEstado.setString(1, tipoCancha);
+                    ResultSet rsEstado = pstmtCheckEstado.executeQuery();
+
+                    if (rsEstado.next()) {
+                        String estadoCancha = rsEstado.getString("estado");
+                        if ("Mantenimiento".equals(estadoCancha) || "Cerrada".equals(estadoCancha)) {
+                            JOptionPane.showMessageDialog(ReservaFrame, "La cancha está " + estadoCancha + ". No se puede reservar.");
+                            return;
+                        }
+                    }
+
                     // Verificar disponibilidad en reservar_canchas
                     String sqlCheckReservas = "SELECT COUNT(*) FROM reservar_canchas WHERE fecha = ? AND tipoCanchas_Reservas = ? AND (hora <= ? AND hora_fin >= ?)";
                     PreparedStatement pstmtCheckReservas = conn.prepareStatement(sqlCheckReservas);
