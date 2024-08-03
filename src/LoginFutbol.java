@@ -9,7 +9,7 @@ public class LoginFutbol {
     public JPasswordField contratext;
     public JButton btnsesion;
     public JButton bntregistrar;
-    public JComboBox modosbtn;
+    public JComboBox<String> modosbtn;
     private JLabel imagenLogin;
     private JLabel titulo;
     private JLabel usuario;
@@ -20,32 +20,27 @@ public class LoginFutbol {
     public LoginFutbol(JFrame frame) {
         this.LoginFrame = frame;
 
-        //Opciones del JComboBox pára el modo de registro
+        // Opciones del JComboBox para el modo de registro
         modosbtn.addItem("Administrador");
         modosbtn.addItem("Jugador");
         modosbtn.addItem("Encargado");
 
-
         bntregistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 LoginFrame.dispose();
-                
                 JFrame frame = new JFrame("Registrarse");
                 frame.setContentPane(new Registrarse(frame).registro);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(9000, 9000);
+                frame.setSize(900, 900);
                 frame.pack();
                 frame.setVisible(true);
             }
         });
 
-
         btnsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String email = usertext.getText();
                 String contrasenia = new String(contratext.getPassword());
                 String modoSeleccionado = (String) modosbtn.getSelectedItem();
@@ -55,9 +50,9 @@ public class LoginFutbol {
                 String user = "root";
                 String password = "123456";
 
-                // Validar los datos del usuario en la base de datos
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                    String sql = "SELECT modo FROM usuarios WHERE email = ? AND contrasenia = ?";
+                    // Primero, verificar en la tabla agregar_jugadores
+                    String sql = "SELECT tipo_rol FROM agregar_jugadores WHERE email = ? AND contrasenia = ?";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setString(1, email);
                     pstmt.setString(2, contrasenia);
@@ -65,13 +60,13 @@ public class LoginFutbol {
                     ResultSet resultSet = pstmt.executeQuery();
 
                     if (resultSet.next()) {
-                        String modo = resultSet.getString("modo");
+                        String rol = resultSet.getString("tipo_rol");
 
-                        if (modo.equals(modoSeleccionado)) {
-                            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso!. Bienvenido " + email);
+                        if (rol.equals(modoSeleccionado)) {
+                            JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso! Bienvenido " + email);
 
                             // Abrir la ventana dependiendo del modo de registro
-                            if (modo.equals("Administrador")) {
+                            if (rol.equals("Administrador")) {
 
                                 LoginFrame.dispose();
                                 JFrame adminFrame = new JFrame("Administrador");
@@ -81,7 +76,7 @@ public class LoginFutbol {
                                 adminFrame.pack();
                                 adminFrame.setVisible(true);
 
-                            } else if (modo.equals("Jugador")) {
+                            } else if (rol.equals("Jugador")) {
 
                                 LoginFrame.dispose();
                                 JFrame JugadorFrame = new JFrame("Jugador");
@@ -91,7 +86,7 @@ public class LoginFutbol {
                                 JugadorFrame.pack();
                                 JugadorFrame.setVisible(true);
 
-                            } else if (modo.equals("Encargado")) {
+                            } else if (rol.equals("Encargado")) {
 
                                 LoginFrame.dispose();
                                 JFrame JugadorFrame = new JFrame("Encargado");
@@ -100,27 +95,68 @@ public class LoginFutbol {
                                 JugadorFrame.setSize(1900, 1600);
                                 JugadorFrame.pack();
                                 JugadorFrame.setVisible(true);
-
-
-
-
-
-
-
-
                             }
-
                             LoginFrame.dispose();
-
                         } else {
                             JOptionPane.showMessageDialog(null, "El modo seleccionado no coincide con el registrado.");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Usuario no encontrado o contraseña incorrecta");
+                        // Si no se encuentra en la primera tabla, verificar en la segunda tabla
+                        sql = "SELECT modo FROM usuarios WHERE email = ? AND contrasenia = ?";
+                        pstmt = conn.prepareStatement(sql);
+                        pstmt.setString(1, email);
+                        pstmt.setString(2, contrasenia);
+
+                        resultSet = pstmt.executeQuery();
+
+                        if (resultSet.next()) {
+                            String modo = resultSet.getString("modo");
+
+                            if (modo.equals(modoSeleccionado)) {
+                                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso! Bienvenido " + email);
+
+                                // Abrir la ventana dependiendo del modo de registro
+                                if (modo.equals("Administrador")) {
+
+                                    LoginFrame.dispose();
+                                    JFrame adminFrame = new JFrame("Administrador");
+                                    adminFrame.setContentPane(new Administrador(adminFrame).admin);
+                                    adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    adminFrame.setSize(1900, 1600);
+                                    adminFrame.pack();
+                                    adminFrame.setVisible(true);
+
+                                } else if (modo.equals("Jugador")) {
+
+                                    LoginFrame.dispose();
+                                    JFrame JugadorFrame = new JFrame("Jugador");
+                                    JugadorFrame.setContentPane(new Jugador(JugadorFrame).jugador);
+                                    JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    JugadorFrame.setSize(1900, 1600);
+                                    JugadorFrame.pack();
+                                    JugadorFrame.setVisible(true);
+
+                                } else if (modo.equals("Encargado")) {
+
+                                    LoginFrame.dispose();
+                                    JFrame JugadorFrame = new JFrame("Encargado");
+                                    JugadorFrame.setContentPane(new Encargado(JugadorFrame).encargado);
+                                    JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    JugadorFrame.setSize(1900, 1600);
+                                    JugadorFrame.pack();
+                                    JugadorFrame.setVisible(true);
+                                }
+                                LoginFrame.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "El modo seleccionado no coincide con el registrado.");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Usuario no encontrado o contraseña incorrecta");
+                        }
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error en la base de datos: ");
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos.");
                 }
             }
         });

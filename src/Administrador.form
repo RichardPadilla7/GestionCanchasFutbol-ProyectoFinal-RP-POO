@@ -37,7 +37,7 @@
         </constraints>
         <properties>
           <font name="Consolas" style="1"/>
-          <text value="Agregar y Gestionar Jugadores"/>
+          <text value="Agregar Clientes"/>
         </properties>
       </component>
       <component id="3f06b" class="javax.swing.JButton" binding="btnHorarios">

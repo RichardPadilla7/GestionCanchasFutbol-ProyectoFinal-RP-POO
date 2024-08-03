@@ -18,6 +18,7 @@ public class ActualizarCanchas {
     public JLabel estado;
     public JPanel mantenimiento;
     public JButton regresarButton;
+    private JButton quitarEstadoDeCanchaButton;
     public JFrame estadoFrame;
     public JFrame encargadoFrame;
 
@@ -55,6 +56,16 @@ public class ActualizarCanchas {
                 if (encargadoframe != null && !encargadoframe.isVisible()) {
                     encargadoframe.setVisible(true);
                 }
+            }
+        });
+
+        quitarEstadoDeCanchaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo_cancha = (String) tipoCanchaBox.getSelectedItem();
+                quitarEstadoCancha(tipo_cancha);
+                mostrarEstadoCanchas(tipo_cancha);
+
             }
         });
     }
@@ -100,6 +111,28 @@ public class ActualizarCanchas {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void quitarEstadoCancha(String tipo_cancha) {
+        String url = "jdbc:mysql://localhost:3306/reservasCanchas";
+        String user = "root";
+        String password = "123456";
+
+        String query = "DELETE FROM estado WHERE tipo_cancha = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, tipo_cancha);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(estadoFrame, "Estado de la cancha eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(estadoFrame, "La cancha no tiene niguna restriccion");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(estadoFrame, "Error al eliminar el estado de la cancha.");
         }
     }
 }

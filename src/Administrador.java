@@ -19,7 +19,7 @@ public class Administrador {
             public void actionPerformed(ActionEvent e) {
                 AdminsFrame.dispose();
 
-                JFrame agregarJugadorFrame = new JFrame("Agregar Jugador");
+                JFrame agregarJugadorFrame = new JFrame("Agregar Clientes");
                 agregarJugadorFrame.setContentPane(new AgregarJugador(agregarJugadorFrame, AdminsFrame).masjugador);
                 agregarJugadorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 agregarJugadorFrame.setSize(900, 600);

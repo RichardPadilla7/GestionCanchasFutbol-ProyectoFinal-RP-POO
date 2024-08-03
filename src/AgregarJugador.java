@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 import java.sql.*;
 
 public class AgregarJugador {
@@ -31,12 +30,18 @@ public class AgregarJugador {
     public JLabel buscarCedula;
     public JButton regresarButton;
     public JTextArea MostrarDatos;
+    public JComboBox TipoRolText;
+    public JLabel tipoRol;
     public JFrame frameAgre;
     public JFrame frameAdmin;
 
     public AgregarJugador(JFrame frameAg, JFrame frameAdmin){
         this.frameAgre = frameAg;
         this.frameAdmin = frameAdmin;
+
+
+        TipoRolText.addItem("Jugador");
+        TipoRolText.addItem("Encargado");
 
         btnagregarJugador.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +53,7 @@ public class AgregarJugador {
                 String email = emailtext.getText();
                 String contrasenia = new String(contratext.getPassword());
                 String telefono = telefonotext.getText();
+                String tipoRol = (String) TipoRolText.getSelectedItem();
 
                 // Conectar a la base de datos
                 String url = "jdbc:mysql://localhost:3306/reservasCanchas";
@@ -55,7 +61,7 @@ public class AgregarJugador {
                 String password = "123456";
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                    String sql = "INSERT INTO agregar_jugadores (nombre, apellido, edad, cedula, email, contrasenia, telefono) VALUES (?,?,?,?,?,?,?)";
+                    String sql = "INSERT INTO agregar_jugadores (nombre, apellido, edad, cedula, email, contrasenia, telefono, tipo_rol) VALUES (?,?,?,?,?,?,?,?)";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
 
                     pstmt.setString(1, nombre);
@@ -65,6 +71,7 @@ public class AgregarJugador {
                     pstmt.setString(5, email);
                     pstmt.setString(6, contrasenia);
                     pstmt.setString(7, telefono);
+                    pstmt.setString(8, tipoRol);
 
                     //Limpiar cuadrso de registros
                     nombretext.setText("");
@@ -75,11 +82,12 @@ public class AgregarJugador {
                     contratext.setText("");
                     telefonotext.setText("");
 
+
                     int rowsAffected = pstmt.executeUpdate();
                     if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(frameAgre, "Jugador agregado exitosamente!");
+                        JOptionPane.showMessageDialog(frameAgre, "Cliente agregado exitosamente!");
                     } else {
-                        JOptionPane.showMessageDialog(frameAgre, "Error al agregar jugador.");
+                        JOptionPane.showMessageDialog(frameAgre, "Error al agregar cliente.");
                     }
                 }catch (Exception ex){
                     ex.printStackTrace();
@@ -112,6 +120,7 @@ public class AgregarJugador {
                         String email = resultSet.getString("email");
                         String contrasenia = resultSet.getString("contrasenia");
                         String telefono = resultSet.getString("telefono");
+                        String tipoRol = resultSet.getString("tipo_rol");
 
                         //Mostrar datos
                         String datosJugador = "Nombre: " + nombre + "\n" +
@@ -120,7 +129,7 @@ public class AgregarJugador {
                                 "Cédula: " + cedula + "\n" +
                                 "Email: " + email + "\n" +
                                 "Contraseña: " + contrasenia + "\n" +
-                                "Teléfono: " + telefono;
+                                "Teléfono: " + telefono + "\n" + "Rol: " + tipoRol + "\n";
                         MostrarDatos.setText(datosJugador);
 
                         // Limpiar los campos de texto
@@ -132,8 +141,9 @@ public class AgregarJugador {
                         contratext.setText("");
                         telefonotext.setText("");
 
+
                     } else {
-                        JOptionPane.showMessageDialog(frameAgre, "Jugador no encontrado.");
+                        JOptionPane.showMessageDialog(frameAgre, "Cliente no encontrado.");
                         MostrarDatos.setText("");
                     }
                 } catch (Exception ex) {
@@ -156,7 +166,7 @@ public class AgregarJugador {
                 String cedulaEliminar = cedulabuscartext.getText();
 
                 if (cedulaEliminar.isEmpty()) {
-                    JOptionPane.showMessageDialog(frameAgre, "Ingrese una cédula para eliminar.");
+                    JOptionPane.showMessageDialog(frameAgre, "Ingrese una cedula para eliminar.");
                     return;
                 }
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -166,10 +176,10 @@ public class AgregarJugador {
 
                     int rowsAffected = pstmt.executeUpdate();
                     if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(frameAgre, "Jugador eliminado exitosamente!");
+                        JOptionPane.showMessageDialog(frameAgre, "Cliente eliminado exitosamente!");
                         MostrarDatos.setText("");
                     } else {
-                        JOptionPane.showMessageDialog(frameAgre, "Jugador no encontrado.");
+                        JOptionPane.showMessageDialog(frameAgre, "Cliente no encontrado.");
                         MostrarDatos.setText("");
                     }
                 } catch (Exception ex) {
