@@ -39,13 +39,15 @@ public class AgregarJugador {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 frameAgre.dispose();
-                JFrame adminFrame = new JFrame("Administrador");
-                adminFrame.setContentPane(new Administrador(adminFrame).admin);
-                adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                adminFrame.setSize(900, 600);
-                adminFrame.pack();
-                adminFrame.setVisible(true);
+
+                JFrame frameAgre = new JFrame("Administrador");
+                frameAgre.setContentPane(new Administrador(frameAgre).admin);
+                frameAgre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frameAgre.setSize(900, 600);
+                frameAgre.pack();
+                frameAgre.setVisible(true);
             }
         });
 
@@ -90,6 +92,7 @@ public class AgregarJugador {
                 }
             }
         });
+
 
         btnbuscarJugador.addActionListener(new ActionListener() {
             @Override

@@ -33,6 +33,7 @@ public class Administrador {
         btnCanchas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 AdminsFrame.dispose();
 
                 JFrame adminFrame = new JFrame("Agregar Cancha");
@@ -48,6 +49,7 @@ public class Administrador {
         btnHorarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 AdminsFrame.dispose();
 
                 JFrame adminFrame = new JFrame("Agregar Horarios");
@@ -56,8 +58,6 @@ public class Administrador {
                 adminFrame.setSize(900, 600);
                 adminFrame.pack();
                 adminFrame.setVisible(true);
-
-
             }
         });
     }

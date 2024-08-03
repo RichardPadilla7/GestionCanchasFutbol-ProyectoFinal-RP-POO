@@ -51,13 +51,17 @@ public class AgregarHoras {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 frameHora.dispose();
+
                 JFrame adminFrame = new JFrame("Administrador");
                 adminFrame.setContentPane(new Administrador(adminFrame).admin);
                 adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 adminFrame.setSize(900, 600);
                 adminFrame.pack();
                 adminFrame.setVisible(true);
+
+
             }
         });
 
