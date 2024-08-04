@@ -27,7 +27,8 @@ public class Encargado {
                 JFrame visualizarReservasFrame = new JFrame("Visualizar Reservas Actuales");
                 visualizarReservasFrame.setContentPane(new VerRegistro(visualizarReservasFrame,encargadoFrame).visualizar);
                 visualizarReservasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                visualizarReservasFrame.setSize(9000, 9000);
+                visualizarReservasFrame.setSize(300, 300);
+                visualizarReservasFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 visualizarReservasFrame.pack();
                 visualizarReservasFrame.setVisible(true);
             }
@@ -43,7 +44,8 @@ public class Encargado {
                 JFrame mantenimientoFrame = new JFrame("Actualizar Estado de la Cancha");
                 mantenimientoFrame.setContentPane(new ActualizarCanchas(mantenimientoFrame, encargadoFrame).mantenimiento);
                 mantenimientoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                mantenimientoFrame.setSize(9000, 9000);
+                mantenimientoFrame.setSize(300, 300);
+                mantenimientoFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 mantenimientoFrame.pack();
                 mantenimientoFrame.setVisible(true);
             }
@@ -59,12 +61,12 @@ public class Encargado {
                 JFrame controlarFrame = new JFrame("Control de Acceso a la Cancha");
                 controlarFrame.setContentPane(new ControlAcceso(controlarFrame,encargadoFrame).controlar);
                 controlarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                controlarFrame.setSize(9000, 9000);
+                controlarFrame.setSize(300, 300);
+                controlarFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 controlarFrame.pack();
                 controlarFrame.setVisible(true);
             }
         });
-
 
     }
 }

@@ -27,7 +27,8 @@ public class Jugador {
                 JFrame reservarCanchasFrame = new JFrame("Reservar Canchas");
                 reservarCanchasFrame.setContentPane(new ReservarCanchas(reservarCanchasFrame,JugadorFrame).reservasCanchas);
                 reservarCanchasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                reservarCanchasFrame.setSize(9000, 9000);
+                reservarCanchasFrame.setSize(300, 300);
+                reservarCanchasFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 reservarCanchasFrame.pack();
                 reservarCanchasFrame.setVisible(true);
             }
@@ -43,7 +44,8 @@ public class Jugador {
                 JFrame cancelarFrame = new JFrame("Detalles de otras Canchas");
                 cancelarFrame.setContentPane(new DetallesCanchas(cancelarFrame,JugadorFrame).deatallesCanchas);
                 cancelarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                cancelarFrame.setSize(25000, 25000);
+                cancelarFrame.setSize(300, 300);
+                cancelarFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 cancelarFrame.pack();
                 cancelarFrame.setVisible(true);
             }
@@ -59,7 +61,8 @@ public class Jugador {
                 JFrame cancelarFrame = new JFrame("Cancelar Reserva");
                 cancelarFrame.setContentPane(new CancelarReserva(cancelarFrame,JugadorFrame).cancelar);
                 cancelarFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                cancelarFrame.setSize(25000, 25000);
+                cancelarFrame.setSize(300, 300);
+                cancelarFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 cancelarFrame.pack();
                 cancelarFrame.setVisible(true);
             }

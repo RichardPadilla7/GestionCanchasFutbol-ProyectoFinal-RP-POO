@@ -59,6 +59,7 @@ public class ActualizarCanchas {
             }
         });
 
+
         quitarEstadoDeCanchaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +88,7 @@ public class ActualizarCanchas {
         }
     }
 
+
     private void mostrarEstadoCanchas(String tipo_cancha) {
         String url = "jdbc:mysql://localhost:3306/reservasCanchas";
         String user = "root";
@@ -114,6 +116,7 @@ public class ActualizarCanchas {
         }
     }
 
+
     public void quitarEstadoCancha(String tipo_cancha) {
         String url = "jdbc:mysql://localhost:3306/reservasCanchas";
         String user = "root";
@@ -135,4 +138,5 @@ public class ActualizarCanchas {
             JOptionPane.showMessageDialog(estadoFrame, "Error al eliminar el estado de la cancha.");
         }
     }
+
 }

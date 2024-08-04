@@ -175,7 +175,6 @@ public class AgregarCancha {
                     JOptionPane.showMessageDialog(frameCancha, "Error en la base de datos");
                 }
 
-
             }
         });
     }
