@@ -151,6 +151,7 @@ public class AgregarCancha {
                 String user = "root";
                 String password = "123456";
 
+                //Validar los objetos
                 String cedulaBorrar = ingresaCeduText.getText();
                 String facultadBorrar = ingresaFacutext.getText();
 

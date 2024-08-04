@@ -39,7 +39,7 @@ public class AgregarJugador {
         this.frameAgre = frameAg;
         this.frameAdmin = frameAdmin;
 
-
+        // JComboBox
         TipoRolText.addItem("Jugador");
         TipoRolText.addItem("Encargado");
 
@@ -62,7 +62,7 @@ public class AgregarJugador {
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
                     String sql = "INSERT INTO agregar_jugadores (nombre, apellido, edad, cedula, email, contrasenia, telefono, tipo_rol) VALUES (?,?,?,?,?,?,?,?)";
-                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    PreparedStatement pstmt = conn.prepareStatement(sql); // Consultas en SQL
 
                     pstmt.setString(1, nombre);
                     pstmt.setString(2, apellido);
@@ -82,8 +82,9 @@ public class AgregarJugador {
                     contratext.setText("");
                     telefonotext.setText("");
 
-
+                    // Consulta en SQL que modificara en la base de datos como INSERT, DELETE y SELECT
                     int rowsAffected = pstmt.executeUpdate();
+
                     if (rowsAffected > 0) {
                         JOptionPane.showMessageDialog(frameAgre, "Cliente agregado exitosamente!");
                     } else {
@@ -100,6 +101,7 @@ public class AgregarJugador {
         btnbuscarJugador.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 // Conectar a la base de datos
                 String url = "jdbc:mysql://localhost:3306/reservasCanchas";
                 String user = "root";
@@ -110,7 +112,7 @@ public class AgregarJugador {
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setString(1, cedulabuscartext.getText());
 
-                    ResultSet resultSet = pstmt.executeQuery();
+                    ResultSet resultSet = pstmt.executeQuery(); // Ejecuta consultas de SQL que devuelve resultados
 
                     if (resultSet.next()) {
                         String nombre = resultSet.getString("nombre");
@@ -140,7 +142,6 @@ public class AgregarJugador {
                         emailtext.setText("");
                         contratext.setText("");
                         telefonotext.setText("");
-
 
                     } else {
                         JOptionPane.showMessageDialog(frameAgre, "Cliente no encontrado.");
@@ -193,7 +194,9 @@ public class AgregarJugador {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 frameAgre.dispose();
+
                 if (frameAdmin != null && !frameAdmin.isVisible()) {
                     frameAdmin.setVisible(true);
                 }

@@ -64,20 +64,22 @@ public class AgregarHoras {
         btnregistrarHora.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String fecha = fechatext.getText();
                 String hora_inicio = hiniciotext.getText();
                 String hora_fin = hfintext.getText();
                 String tipo_cancha = (String) tipo_cancha2.getSelectedItem();
 
-                // Convertir la fecha al formato yyyy-MM-dd
-                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String fechaFormateada = null;
+                // Convertir la fecha al formato YY-MM-DD
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy"); //Analiza la fecha y le da un formato
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd"); //Le imprime la fecha
+                String fechaFormateada = null; //Inicializado
+
                 try {
                     fechaFormateada = outputFormat.format(inputFormat.parse(fecha));
                 } catch (ParseException ex) {
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error en el formato de la fecha. Use dd/MM/yyyy.");
+                    JOptionPane.showMessageDialog(null, "Error en el formato de la fecha. Use DD/MM/YY.");
                     return;
                 }
 
@@ -107,8 +109,9 @@ public class AgregarHoras {
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al registrar la hora!");
                     }
+
                 }catch(Exception ex){
-                    ex.printStackTrace();
+                    ex.printStackTrace(); //Imprime en ña consola las exepciones o errores durante la ejecucion
                     JOptionPane.showMessageDialog(null, "Error en la base de datos");
                 }
             }
@@ -118,6 +121,7 @@ public class AgregarHoras {
         buscaHorarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String fecha = ingresefechaText.getText();
                 String tipo_cancha = (String) ingreseTipoCanchaText.getSelectedItem();
 
@@ -125,6 +129,7 @@ public class AgregarHoras {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaFormateada = null;
+
                 try {
                     fechaFormateada = outputFormat.format(inputFormat.parse(fecha));
                 } catch (ParseException ex) {
@@ -164,6 +169,7 @@ public class AgregarHoras {
                         JOptionPane.showMessageDialog(frameHora, "Horario no encontrada");
                         MostrarDatosHorario.setText("");
                         }
+
                     }catch (Exception ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(frameHora, "Error en la base de datos");

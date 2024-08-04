@@ -33,28 +33,34 @@ public class DetallesCanchas {
         tipoCanchasDetallesText.addItem("Cancha de cemento");
         tipoCanchasDetallesText.addItem("Cancha de tierra");
         tipoCanchasDetallesText.addItem("Cancha sintetico");
-
         // Configurar el JLabel para la URL de la imagen
         mostrarURL.setHorizontalAlignment(SwingConstants.CENTER);
+
 
         btnDetallesCanchas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                //Validar objeto
                 String tipoCancha = (String) tipoCanchasDetallesText.getSelectedItem();
 
+                //Me conecta a la base de datos
                 String url = "jdbc:mysql://localhost:3306/reservasCanchas";
                 String user = "root";
                 String password = "123456";
 
+                //Me permite crear y manejar cadenas de texto con append que sirve para añadir texto
                 StringBuilder detalles = new StringBuilder();
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
+
                     // Obtener detalles de la tabla canchas
                     String sqlCanchas = "SELECT * FROM canchas WHERE tipo_cancha = ?";
                     PreparedStatement pstmtCanchas = conn.prepareStatement(sqlCanchas);
                     pstmtCanchas.setString(1, tipoCancha);
 
                     ResultSet rsCanchas = pstmtCanchas.executeQuery();
+
                     detalles.append("Detalles de Canchas desde Administrador:\n");
                     if (rsCanchas.next()) {
                         detalles.append("Facultad: ").append(rsCanchas.getString("facultad"))
@@ -121,14 +127,17 @@ public class DetallesCanchas {
                             break;
                     }
 
+
                     if (!imagenURL.isEmpty()) {
                         try {
-                            URL urlImagen = new URL(imagenURL);
-                            ImageIcon imagen = new ImageIcon(ImageIO.read(urlImagen));
+                            URL urlImagen = new URL(imagenURL); //Crea una URl desde la cadena de texto imagenURL.
+                            ImageIcon imagen = new ImageIcon(ImageIO.read(urlImagen)); //Lee la imagen y la convierte en una imagenIncono que luego se imprime en la pantalla
 
-                            // Redimensionar la imagen
+                            // Tamaño de la imagen
+                            // getScaledInstance tiene el parametro de Image.SCALE_SMOOTH que da el tipo de interpolación que se debe usar para dar el tamaño de una imagen.
                             Image imgEscalada = imagen.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
                             mostrarURL.setIcon(new ImageIcon(imgEscalada));
+
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                             JOptionPane.showMessageDialog(DetallesFrame, "Error al cargar la imagen");
@@ -136,12 +145,10 @@ public class DetallesCanchas {
                     } else {
                         mostrarURL.setIcon(null);
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(DetallesFrame, "Error en la base de datos");
                 }
             }
         });
+
 
         regresarButton.addActionListener(new ActionListener() {
             @Override
