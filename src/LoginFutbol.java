@@ -32,15 +32,18 @@ public class LoginFutbol {
                 JFrame frame = new JFrame("Registrarse");
                 frame.setContentPane(new Registrarse(frame).registro);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(900, 900);
+                frame.setSize(300, 300);
+                frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 frame.pack();
                 frame.setVisible(true);
             }
         });
 
+
         btnsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String email = usertext.getText();
                 String contrasenia = new String(contratext.getPassword());
                 String modoSeleccionado = (String) modosbtn.getSelectedItem();
@@ -51,7 +54,8 @@ public class LoginFutbol {
                 String password = "123456";
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
-                    // Primero, verificar en la tabla agregar_jugadores
+
+                    // Verificar en la tabla agregar_jugadores por parte del administrador
                     String sql = "SELECT tipo_rol FROM agregar_jugadores WHERE email = ? AND contrasenia = ?";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setString(1, email);
@@ -72,7 +76,8 @@ public class LoginFutbol {
                                 JFrame adminFrame = new JFrame("Administrador");
                                 adminFrame.setContentPane(new Administrador(adminFrame).admin);
                                 adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                adminFrame.setSize(1900, 1600);
+                                adminFrame.setSize(300, 300);
+                                adminFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
                                 adminFrame.pack();
                                 adminFrame.setVisible(true);
 
@@ -82,26 +87,29 @@ public class LoginFutbol {
                                 JFrame JugadorFrame = new JFrame("Jugador");
                                 JugadorFrame.setContentPane(new Jugador(JugadorFrame).jugador);
                                 JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                JugadorFrame.setSize(1900, 1600);
+                                JugadorFrame.setSize(300, 300);
+                                JugadorFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
                                 JugadorFrame.pack();
                                 JugadorFrame.setVisible(true);
 
                             } else if (rol.equals("Encargado")) {
 
                                 LoginFrame.dispose();
-                                JFrame JugadorFrame = new JFrame("Encargado");
-                                JugadorFrame.setContentPane(new Encargado(JugadorFrame).encargado);
-                                JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                JugadorFrame.setSize(1900, 1600);
-                                JugadorFrame.pack();
-                                JugadorFrame.setVisible(true);
+                                JFrame encargadoFrame = new JFrame("Encargado");
+                                encargadoFrame.setContentPane(new Encargado(encargadoFrame).encargado);
+                                encargadoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                encargadoFrame.setSize(300, 300);
+                                encargadoFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
+                                encargadoFrame.pack();
+                                encargadoFrame.setVisible(true);
                             }
                             LoginFrame.dispose();
                         } else {
                             JOptionPane.showMessageDialog(null, "El modo seleccionado no coincide con el registrado.");
                         }
                     } else {
-                        // Si no se encuentra en la primera tabla, verificar en la segunda tabla
+
+                        //Si no se encuentra en la primera tabla verificar en la segunda tabla
                         sql = "SELECT modo FROM usuarios WHERE email = ? AND contrasenia = ?";
                         pstmt = conn.prepareStatement(sql);
                         pstmt.setString(1, email);
@@ -122,7 +130,8 @@ public class LoginFutbol {
                                     JFrame adminFrame = new JFrame("Administrador");
                                     adminFrame.setContentPane(new Administrador(adminFrame).admin);
                                     adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                    adminFrame.setSize(1900, 1600);
+                                    adminFrame.setSize(300, 300);
+                                    adminFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
                                     adminFrame.pack();
                                     adminFrame.setVisible(true);
 
@@ -132,19 +141,21 @@ public class LoginFutbol {
                                     JFrame JugadorFrame = new JFrame("Jugador");
                                     JugadorFrame.setContentPane(new Jugador(JugadorFrame).jugador);
                                     JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                    JugadorFrame.setSize(1900, 1600);
+                                    JugadorFrame.setSize(300, 300);
+                                    JugadorFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
                                     JugadorFrame.pack();
                                     JugadorFrame.setVisible(true);
 
                                 } else if (modo.equals("Encargado")) {
 
                                     LoginFrame.dispose();
-                                    JFrame JugadorFrame = new JFrame("Encargado");
-                                    JugadorFrame.setContentPane(new Encargado(JugadorFrame).encargado);
-                                    JugadorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                    JugadorFrame.setSize(1900, 1600);
-                                    JugadorFrame.pack();
-                                    JugadorFrame.setVisible(true);
+                                    JFrame encargadoFrame = new JFrame("Encargado");
+                                    encargadoFrame.setContentPane(new Encargado(encargadoFrame).encargado);
+                                    encargadoFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                    encargadoFrame.setSize(300, 300);
+                                    encargadoFrame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
+                                    encargadoFrame.pack();
+                                    encargadoFrame.setVisible(true);
                                 }
                                 LoginFrame.dispose();
                             } else {

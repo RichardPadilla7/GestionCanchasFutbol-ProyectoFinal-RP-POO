@@ -22,11 +22,13 @@ public class Administrador {
                 JFrame agregarJugadorFrame = new JFrame("Agregar Clientes");
                 agregarJugadorFrame.setContentPane(new AgregarJugador(agregarJugadorFrame, AdminsFrame).masjugador);
                 agregarJugadorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                agregarJugadorFrame.setSize(900, 600);
+                agregarJugadorFrame.setSize(300, 300);
+                agregarJugadorFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 agregarJugadorFrame.pack();
                 agregarJugadorFrame.setVisible(true);
             }
         });
+
 
         btnCanchas.addActionListener(new ActionListener() {
             @Override
@@ -36,11 +38,13 @@ public class Administrador {
                 JFrame agregarCanchaFrame = new JFrame("Agregar Cancha");
                 agregarCanchaFrame.setContentPane(new AgregarCancha(agregarCanchaFrame, AdminsFrame).canchaPanel);
                 agregarCanchaFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                agregarCanchaFrame.setSize(900, 600);
+                agregarCanchaFrame.setSize(300, 300);
+                agregarCanchaFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 agregarCanchaFrame.pack();
                 agregarCanchaFrame.setVisible(true);
             }
         });
+
 
         btnHorarios.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +54,8 @@ public class Administrador {
                 JFrame agregarHorasFrame = new JFrame("Agregar Horarios");
                 agregarHorasFrame.setContentPane(new AgregarHoras(agregarHorasFrame, AdminsFrame).horasPanel);
                 agregarHorasFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                agregarHorasFrame.setSize(900, 600);
+                agregarHorasFrame.setSize(300, 300);
+                agregarHorasFrame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
                 agregarHorasFrame.pack();
                 agregarHorasFrame.setVisible(true);
             }
