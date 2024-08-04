@@ -10,7 +10,7 @@ public class Main {
         frame.setContentPane(new LoginFutbol(frame).login);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 300);
-        frame.setLocationRelativeTo(null); //Centra la ventana en la pantalla
+        frame.setLocationRelativeTo(null); //Esta parte sirve para centrar a la pantalla el JPanel
         frame.pack();
         frame.setVisible(true);
     }
