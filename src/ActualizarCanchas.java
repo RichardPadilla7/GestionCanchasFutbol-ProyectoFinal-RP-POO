@@ -71,11 +71,14 @@ public class ActualizarCanchas {
         });
     }
 
+
     private void actualizarEstadoCancha(String tipo_cancha, String estado_cancha) {
+
         String url = "jdbc:mysql://localhost:3306/reservasCanchas";
         String user = "root";
         String password = "123456";
 
+        //Remplaza datos de la tabla ya exitentes algun cambio sin necesidad de cambiar de manera manual
         String query = "REPLACE INTO estado (tipo_cancha, estado) VALUES (?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
@@ -90,6 +93,7 @@ public class ActualizarCanchas {
 
 
     private void mostrarEstadoCanchas(String tipo_cancha) {
+
         String url = "jdbc:mysql://localhost:3306/reservasCanchas";
         String user = "root";
         String password = "123456";
@@ -109,7 +113,7 @@ public class ActualizarCanchas {
                         .append("\n");
                 mostrarEstado.setText(sb.toString());
             } else {
-                mostrarEstado.setText("No se encontró informacion para la cancha seleccionada.");
+                mostrarEstado.setText("No se encontro informacion de la cancha seleccionada.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,6 +122,7 @@ public class ActualizarCanchas {
 
 
     public void quitarEstadoCancha(String tipo_cancha) {
+
         String url = "jdbc:mysql://localhost:3306/reservasCanchas";
         String user = "root";
         String password = "123456";
@@ -129,13 +134,13 @@ public class ActualizarCanchas {
             pstmt.setString(1, tipo_cancha);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(estadoFrame, "Estado de la cancha eliminado correctamente.");
+                JOptionPane.showMessageDialog(estadoFrame, "Estado de la cancha eliminado correctamente!.");
             } else {
-                JOptionPane.showMessageDialog(estadoFrame, "La cancha no tiene niguna restriccion");
+                JOptionPane.showMessageDialog(estadoFrame, "La cancha no tiene ningun estado por ahora!.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(estadoFrame, "Error al eliminar el estado de la cancha.");
+            JOptionPane.showMessageDialog(estadoFrame, "Error en la base de datos de estado.");
         }
     }
 

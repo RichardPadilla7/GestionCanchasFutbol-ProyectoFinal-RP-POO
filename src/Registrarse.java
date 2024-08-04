@@ -79,6 +79,13 @@ public class Registrarse {
                     pstmt.setString(5, cedula);
                     pstmt.setString(6, modo);
 
+                    //Limpiar los cuadros de registros
+                    textField1.setText("");
+                    textField2.setText("");
+                    textField3.setText("");
+                    textField4.setText("");
+                    textField5.setText("");
+
                     int rowsAffected = pstmt.executeUpdate();
 
                     if (rowsAffected > 0) {
