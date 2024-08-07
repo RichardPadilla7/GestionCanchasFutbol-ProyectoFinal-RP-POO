@@ -86,9 +86,9 @@ public class Registrarse {
                     textField4.setText("");
                     textField5.setText("");
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(null, "Registro exitoso!");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al registrarse. Intente nuevamente.");

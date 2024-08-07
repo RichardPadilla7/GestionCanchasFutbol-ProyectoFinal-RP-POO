@@ -175,8 +175,9 @@ public class AgregarJugador {
                     PreparedStatement pstmt = conn.prepareStatement(sql);
                     pstmt.setString(1, cedulaEliminar);
 
-                    int rowsAffected = pstmt.executeUpdate();
-                    if (rowsAffected > 0) {
+                    int consultar = pstmt.executeUpdate();
+
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(frameAgre, "Cliente eliminado exitosamente!");
                         MostrarDatos.setText("");
                     } else {

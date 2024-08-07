@@ -44,7 +44,9 @@ public class AgregarCancha {
 
         btnregresar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 frameCancha.dispose();
+
                 if (frameAdmin != null && !frameAdmin.isVisible()) {
                     frameAdmin.setVisible(true);
                 }
@@ -162,9 +164,9 @@ public class AgregarCancha {
                     pstmt.setString(1, cedulaBorrar);
                     pstmt.setString(2, facultadBorrar);
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(frameCancha, "Cancha eliminada exitosamente!");
                         MostrarDatosCancha.setText("");
                     } else {

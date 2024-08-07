@@ -102,9 +102,9 @@ public class AgregarHoras {
                     hiniciotext.setText("");
                     hfintext.setText("");
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(null, "Hora registrada exitosamente!");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al registrar la hora!");
