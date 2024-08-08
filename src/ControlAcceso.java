@@ -46,7 +46,7 @@ public class ControlAcceso {
                     pstmt.setString(2, correo);
 
                     ResultSet resultSet = pstmt.executeQuery();
-                    StringBuilder info = new StringBuilder();
+                    StringBuilder informacion = new StringBuilder();
 
                     if (resultSet.next()) {
                         // Usuario registrado, verificar reservas
@@ -57,17 +57,17 @@ public class ControlAcceso {
                         ResultSet rsReserva = pstmtReserva.executeQuery();
 
                         if (rsReserva.next()) {
-                            info.append(" -- Detalles de la Reserva --\n");
-                            info.append("Fecha: ").append(rsReserva.getDate("fecha")).append("\n");
-                            info.append("Hora Inicio: ").append(rsReserva.getTime("hora")).append("\n");
-                            info.append("Hora Fin: ").append(rsReserva.getTime("hora_fin")).append("\n");
-                            info.append("Tipo de Cancha: ").append(rsReserva.getString("tipoCanchas_Reservas")).append("\n\n");
-                            info.append("¡Usted esta autorizado, Disfrute su partido!");
+                            informacion.append(" -- Detalles de la Reserva --\n");
+                            informacion.append("Fecha: ").append(rsReserva.getDate("fecha")).append("\n");
+                            informacion.append("Hora Inicio: ").append(rsReserva.getTime("hora")).append("\n");
+                            informacion.append("Hora Fin: ").append(rsReserva.getTime("hora_fin")).append("\n");
+                            informacion.append("Tipo de Cancha: ").append(rsReserva.getString("tipoCanchas_Reservas")).append("\n\n");
+                            informacion.append("¡Usted esta autorizado, Disfrute su partido!");
                         } else {
-                            info.append("No tiene reservas registradas.");
+                            informacion.append("No tiene reservas registradas.");
                         }
 
-                        mostrarInfo.setText(info.toString());
+                        mostrarInfo.setText(informacion.toString());
                         cedulaText.setEditable(false);
                         correoText.setEditable(false);
                         autorizarButton.setEnabled(false);

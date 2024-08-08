@@ -83,9 +83,9 @@ public class AgregarJugador {
                     telefonotext.setText("");
 
                     // Consulta en SQL que modificara en la base de datos como INSERT, DELETE y SELECT
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(frameAgre, "Cliente agregado exitosamente!");
                     } else {
                         JOptionPane.showMessageDialog(frameAgre, "Error al agregar cliente.");

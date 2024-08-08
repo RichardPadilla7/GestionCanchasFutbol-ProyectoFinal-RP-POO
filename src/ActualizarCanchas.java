@@ -132,8 +132,10 @@ public class ActualizarCanchas {
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, tipo_cancha);
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
+
+            int consultar = pstmt.executeUpdate();
+
+            if (consultar > 0) {
                 JOptionPane.showMessageDialog(estadoFrame, "Estado de la cancha eliminado correctamente!.");
             } else {
                 JOptionPane.showMessageDialog(estadoFrame, "La cancha no tiene ningun estado por ahora!.");

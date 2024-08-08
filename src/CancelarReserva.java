@@ -50,9 +50,9 @@ public class CancelarReserva {
                     pstmt.setString(1, cedula);
                     pstmt.setString(2, tipo);
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(cancelarFrame, "Reserva cancelada exitosamente!");
                         canCedulaText.setText("");
                         canTipoText.setSelectedIndex(0);

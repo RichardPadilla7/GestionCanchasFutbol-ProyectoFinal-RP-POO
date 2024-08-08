@@ -108,9 +108,9 @@ public class ReservarCanchas {
 
                     ResultSet rsHorarios = pstmtCheckHorarios.executeQuery();
                     rsHorarios.next();
-                    int countHorarios = rsHorarios.getInt(1);
+                    int contarHorarios = rsHorarios.getInt(1);
 
-                    if (countReservas > 0 || countHorarios > 0) {
+                    if (countReservas > 0 || contarHorarios > 0) {
                         JOptionPane.showMessageDialog(ReservaFrame, "La cancha ya está reservada para esa fecha y hora.");
                     } else {
                         // Insertar reserva
@@ -123,9 +123,9 @@ public class ReservarCanchas {
                         pstmtInsert.setString(4, horaFin);
                         pstmtInsert.setString(5, tipoCancha);
 
-                        int rowsAffected = pstmtInsert.executeUpdate();
+                        int consultar = pstmtInsert.executeUpdate();
 
-                        if (rowsAffected > 0) {
+                        if (consultar > 0) {
                             JOptionPane.showMessageDialog(ReservaFrame, "Reserva confirmada exitosamente!");
                             // Limpiar los campos de texto
                             cedulaReseText.setText("");
