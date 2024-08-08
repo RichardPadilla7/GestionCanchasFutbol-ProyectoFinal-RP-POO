@@ -38,7 +38,6 @@ public class ControlAcceso {
                 }
 
                 try (Connection conn = DriverManager.getConnection(url, user, password)) {
-
                     // Verificar si el usuario está registrado
                     String sql = "SELECT * FROM usuarios WHERE cedula = ? AND email = ?";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -62,7 +61,7 @@ public class ControlAcceso {
                             informacion.append("Hora Inicio: ").append(rsReserva.getTime("hora")).append("\n");
                             informacion.append("Hora Fin: ").append(rsReserva.getTime("hora_fin")).append("\n");
                             informacion.append("Tipo de Cancha: ").append(rsReserva.getString("tipoCanchas_Reservas")).append("\n\n");
-                            informacion.append("¡Usted esta autorizado, Disfrute su partido!");
+                            informacion.append("¡Usted está autorizado, disfrute su partido!");
                         } else {
                             informacion.append("No tiene reservas registradas.");
                         }
@@ -74,7 +73,7 @@ public class ControlAcceso {
                         regresarButton.setEnabled(true);
 
                     } else {
-                        JOptionPane.showMessageDialog(controlFrame, "No esta autorizado. Registrese y Reserve la Cancha en el sistema de manera correcta.");
+                        JOptionPane.showMessageDialog(controlFrame, "No está autorizado. Regístrese y reserve la cancha en el sistema de manera correcta.");
                     }
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -82,6 +81,7 @@ public class ControlAcceso {
                 }
             }
         });
+
 
         regresarButton.addActionListener(new ActionListener() {
             @Override
