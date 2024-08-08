@@ -220,11 +220,12 @@ ACTUALIZAR CANCHA
 
 ![image](https://github.com/user-attachments/assets/c25c522b-6e79-44c1-bc64-c3df4d6f3a37)
 
-5.- Y por utlimo tenemos mi funcion de eliminar que es la misma estruyctura donde solo le pido que me consute ami MySQL por medio de PreparedStatement pstmt = conn.prepareStatement(query)) en mi tabla de base de datos con parametros    String query = "DELETE FROM estado WHERE tipo_cancha = ?";
+5.- Y por utlimo tenemos mi funcion de eliminar que es la misma estruyctura donde solo le pido que me consute ami MySQL por medio de PreparedStatement pstmt = conn.prepareStatement(query)) en mi tabla de base de datos con parametros    String query = "DELETE FROM estado WHERE tipo_cancha = ?"; <br>
 
 ![image](https://github.com/user-attachments/assets/41e4253c-54d5-48d4-bbac-991db7fd3b8f)
 
 
+               ----------------------------------------- MUCHAS GRACIAS --------------------------------------------------
 
 
 
