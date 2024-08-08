@@ -85,9 +85,9 @@ public class AgregarCancha {
                     ubitext.setText("");
                     capacidadtext.setText("");
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(frameCancha, "Cancha agregada exitosamente!");
                     } else {
                         JOptionPane.showMessageDialog(frameCancha, "Error al agregar cancha. Intente nuevamente.");

@@ -209,9 +209,9 @@ public class AgregarHoras {
                     pstmt.setString(1, fechaFormateada);
                     pstmt.setString(2, tipo_cancha);
 
-                    int rowsAffected = pstmt.executeUpdate();
+                    int consultar = pstmt.executeUpdate();
 
-                    if (rowsAffected > 0) {
+                    if (consultar > 0) {
                         JOptionPane.showMessageDialog(frameHora, "Hora eliminada exitosamente!");
                         MostrarDatosHorario.setText("");
                     } else {
