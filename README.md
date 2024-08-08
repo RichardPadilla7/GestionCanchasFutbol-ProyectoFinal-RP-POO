@@ -1,10 +1,10 @@
-ESCUELA POLITECNICA NACIONAL
-PROGRAMACION ORIENTADA A OBJETOS
-Nombre: Richard Padilla
-Fecha: 6/8/2024
-PROYECTO FINAL DE POO - GESTION DE CANCHAS
+ESCUELA POLITECNICA NACIONAL <br>
+PROGRAMACION ORIENTADA A OBJETOS <br>
+Nombre: Richard Padilla <br>
+Fecha: 6/8/2024 <br>
+PROYECTO FINAL DE POO - GESTION DE CANCHAS <br>
 
--- INFORME -- 
+-- INFORME --  <br>
 
 A) Detallar cada parte del programa mediante capturas.
 
